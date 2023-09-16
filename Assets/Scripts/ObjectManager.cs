@@ -3,16 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class ObjectManager : MonoBehaviour
 {
-     public SceneManager sceneManager;
 
     float _rotateSpeed = 200f;
 
     private string _player = "Player";
-    private string _level1 = "Level1";
 
     private void Start()
     {
-        sceneManager = GetComponent<SceneManager>();
+       
     }
 
     private void Update()

@@ -7,11 +7,6 @@ public class SceneMangement : MonoBehaviour
 {
 
 
-    public void Update()
-    {
-        SceneManager.LoadScene("Level1");
-    }  
-
   
 
 
