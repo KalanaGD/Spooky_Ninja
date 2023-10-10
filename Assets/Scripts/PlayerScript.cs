@@ -1,17 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    [SerializeField] GameObject _gameOverPanel;
 
     private Rigidbody2D _rb;
     private Animator _anim;
 
-    public Vector3 _jumpForce = new Vector2(0, 10); // for player jump
-    private Vector3 _cameraSpeed = new Vector3(5, 0, 0); // for camera movement 
+    private float _jumpForce = 9f;
+    private float _moveSpeed = 3f;
     private string __jumpParameter = "Jumping";
+
 
 
 
@@ -20,31 +19,42 @@ public class PlayerScript : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
     }
-   
+
     void Update()
     {
         PlayerJump();
         PlayerMove();
     }
 
-    private void PlayerMove()
+
+
+    private void PlayerMove() 
     {
-        transform.position += _cameraSpeed * Time.deltaTime; // for camera movement
+        transform.position += new Vector3(_moveSpeed, 0, 0) * Time.deltaTime;
     }
 
     private void PlayerJump()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            _rb.velocity = _jumpForce; // jump process of the player
-            _anim.SetBool(__jumpParameter, true); 
+            _rb.velocity = new Vector2(0, _jumpForce);
+            _anim.SetBool(__jumpParameter, true);
         }
-        else 
+        else
         {
             _anim.SetBool(__jumpParameter, false);
         }
-    }  
+    }
 
-   
+    private void OnCollisionEnter2D(Collision2D target)
+    {
+        if (target.gameObject.CompareTag("PlayerLife"))
+        {
+            _gameOverPanel.SetActive(true);
+            _moveSpeed  = 0;
+            _jumpForce = 0;
+        }
+    }
+
 
 }// Class

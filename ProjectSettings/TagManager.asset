@@ -4,9 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Sward
-  - Bounder
-  - Blades
+  - PlayerLife
   layers:
   - Default
   - TransparentFX
