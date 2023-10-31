@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2554524718649940771}
   - component: {fileID: 269779668542766473}
-  - component: {fileID: 7467898601796672866}
   - component: {fileID: 3950439154145689869}
+  - component: {fileID: 3461533846886386247}
   m_Layer: 0
   m_Name: Blades 2
   m_TagString: PlayerLife
@@ -86,18 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7467898601796672866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5865206905583186290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b03b65c31b6794a8d741df68a4a0f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &3950439154145689869
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,3 +121,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.7983389
+--- !u!114 &3461533846886386247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5865206905583186290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b03b65c31b6794a8d741df68a4a0f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

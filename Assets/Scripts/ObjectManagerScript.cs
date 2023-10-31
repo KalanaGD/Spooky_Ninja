@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class ObjectManager : MonoBehaviour
+public class ObjectManagerScript : MonoBehaviour
 {
     float _rotateSpeed = 200f;
 
