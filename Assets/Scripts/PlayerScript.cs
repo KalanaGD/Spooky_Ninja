@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField] GameObject _quitBTN;
+    [SerializeField] GameObject _nextBTN;
 
     private Rigidbody2D _rb;
     private Animator _anim;
@@ -30,16 +31,23 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        PlayerJump();
-        PlayerMove();
+        PlayerMoveProcess();
+        ForUse();
     }
 
-    
-    private void PlayerMove()
+    private void ForUse()
     {
-        if (_finished!= true)
+        if (_finished || _dead)
         {
+            _moveSpeed = 0;
+            _jumpForce = 0;
+        }
+    }
 
+    private void PlayerMoveProcess()
+    {
+        if (_finished) return;
+        {
             if (Input.GetMouseButtonDown(0))
             {
                 _rb.bodyType = RigidbodyType2D.Dynamic;
@@ -47,17 +55,10 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if(_dead!= true)
+        if (_dead != true)
         {
             transform.position += new Vector3(_moveSpeed, 0, 0) * Time.deltaTime;
-        }
-    }
 
-
-    private void PlayerJump()
-    {
-        if (_dead != true) // move speed not equal to '0' then can jump
-        {
             if (Input.GetMouseButtonDown(0))
             {
                 _rb.velocity = new Vector2(0, _jumpForce);
@@ -67,26 +68,24 @@ public class PlayerScript : MonoBehaviour
             {
                 _anim.SetBool(_jumpParameter, false);
             }
+
         }
     }
 
 
-    private void OnCollisionEnter2D(Collision2D harmfullobjects) // after death restart the same mission
+    private void OnCollisionEnter2D(Collision2D harmfullobjects)
     {
         if (harmfullobjects.gameObject.CompareTag("PlayerLife"))
         {
             _dead = true;
-            _moveSpeed = 0;
-            _jumpForce = 0;
-            
-            
-
             _quitBTN.SetActive(false);
-           
+            _nextBTN.SetActive(false);
+
             StartCoroutine(RetryGame());
         }
 
     }
+
 
     private IEnumerator RetryGame()
     {
@@ -96,16 +95,14 @@ public class PlayerScript : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D finishgameBTN)
+    private void OnTriggerEnter2D(Collider2D finishGameBTN)
     {
-        if (finishgameBTN.gameObject.CompareTag("NextBTN"))
+        if (finishGameBTN.gameObject.CompareTag("NextBTN") && _dead != true)
         {
             _finished = true;
-            _dead = true;   
             _rb.bodyType = RigidbodyType2D.Static;
-            _moveSpeed = 0;
             _quitBTN.SetActive(false);
         }
     }
-    
+
 }// Class

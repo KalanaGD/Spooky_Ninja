@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -582493680033992377}
   - component: {fileID: 8289012692148841581}
   m_Layer: 0
-  m_Name: 'Blades1 '
+  m_Name: Blades 1
   m_TagString: PlayerLife
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
