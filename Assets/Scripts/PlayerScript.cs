@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _anim;
 
-    private float _jumpForce = 9f;
+    private float _jumpForce = 8f;
     private float _moveSpeed = 4f;
     private string _jumpParameter = "Jumping";
     private bool _finished = false;

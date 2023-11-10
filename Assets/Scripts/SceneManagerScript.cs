@@ -16,12 +16,5 @@ public class SceneManagerScript : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-}
+}//class
 
-/*
- SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
- * this code for load the next level
- 
- 
-  
-*/

@@ -12,4 +12,5 @@ public class UIManagerScript : MonoBehaviour
             _levelPassPanel.SetActive(true);
         }
     }
-}
+
+}//class
