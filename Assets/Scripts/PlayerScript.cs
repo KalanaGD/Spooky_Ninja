@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,15 +6,19 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField] GameObject _quitBTN;
-    [SerializeField] GameObject _nextBTN;
+    [SerializeField] GameObject _finishBTN;
+    [SerializeField] GameObject _jumpFX;
+    [SerializeField] Transform _jumpPoint;
 
     private Rigidbody2D _rb;
     private Animator _anim;
+    [SerializeField] private Animator _anim2;
 
     private float _jumpForce = 8f;
     private float _moveSpeed = 4f;
     private string _jumpParameter = "Jumping";
-    private bool _finished = false;
+
+    public bool _gameFinished = false;
     private bool _dead = false;
 
 
@@ -24,20 +29,24 @@ public class PlayerScript : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
 
+
         _moveSpeed = 0;
         _rb.bodyType = RigidbodyType2D.Static;
     }
 
-
     void Update()
     {
         PlayerMoveProcess();
-        ForUse();
+        AfterUse();
+        
     }
 
-    private void ForUse()
+
+
+
+    private void AfterUse()
     {
-        if (_finished || _dead)
+        if (_gameFinished || _dead)
         {
             _moveSpeed = 0;
             _jumpForce = 0;
@@ -46,12 +55,16 @@ public class PlayerScript : MonoBehaviour
 
     private void PlayerMoveProcess()
     {
-        if (_finished) return;
+        if (_gameFinished) return;
         {
             if (Input.GetMouseButtonDown(0))
             {
                 _rb.bodyType = RigidbodyType2D.Dynamic;
                 _moveSpeed = 4.5f;
+
+                GameObject _jumpFXclone = Instantiate(_jumpFX,_jumpPoint.position, Quaternion.identity);
+
+                Destroy(_jumpFXclone , 1f);
             }
         }
 
@@ -68,10 +81,8 @@ public class PlayerScript : MonoBehaviour
             {
                 _anim.SetBool(_jumpParameter, false);
             }
-
         }
     }
-
 
     private void OnCollisionEnter2D(Collision2D harmfullobjects)
     {
@@ -79,13 +90,11 @@ public class PlayerScript : MonoBehaviour
         {
             _dead = true;
             _quitBTN.SetActive(false);
-            _nextBTN.SetActive(false);
+            _anim2.SetBool("NoPlayer", true);
 
             StartCoroutine(RetryGame());
         }
-
     }
-
 
     private IEnumerator RetryGame()
     {
@@ -94,14 +103,15 @@ public class PlayerScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
     private void OnTriggerEnter2D(Collider2D finishGameBTN)
     {
         if (finishGameBTN.gameObject.CompareTag("NextBTN") && _dead != true)
         {
-            _finished = true;
+            _gameFinished = true;
             _rb.bodyType = RigidbodyType2D.Static;
             _quitBTN.SetActive(false);
+            
+            
         }
     }
 

@@ -10,6 +10,11 @@ public class SceneManagerScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
     }
 
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("LevelSelectMenu");
+        
+    }
 
     public void QuitGame()
     {
